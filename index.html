@@ -14,48 +14,73 @@
         header, footer {
             text-align: center;
             padding: 1em;
-            background-color: #4A90E2;
+            background-color: #333;
             color: #fff;
+            background: linear-gradient(135deg, #6d5dfc 0%, #6bdefc 100%);
         }
         main {
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         article {
             background: #fff;
-            margin: 20px auto;
+            margin-top: 20px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            width: 80%;
             max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         h2 {
-            color: #333;
+            color: #2c3e50;
         }
         .date {
-            color: #666;
+            color: #95a5a6;
             font-size: 0.85em;
         }
         #inputForm {
-            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
             margin-top: 20px;
+            background: #fff;
+            border-radius: 10px;
         }
         input[type="text"], textarea {
             padding: 10px;
-            margin: 10px;
-            border: 1px solid #ddd;
+            margin-top: 10px;
+            border: 2px solid #ddd;
             border-radius: 4px;
-            width: 70%;
+            width: 100%;
+            box-sizing: border-box; /* Ensures padding does not affect width */
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #6d5dfc;
         }
         input[type="button"] {
             padding: 10px 20px;
-            background-color: #5cb85c;
+            background-color: #6d5dfc;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         input[type="button"]:hover {
-            background-color: #4cae4c;
+            background-color: #5c4efc;
         }
     </style>
 </head>
@@ -67,7 +92,7 @@
 
     <main>
         <div id="inputForm">
-            <input type="text" id="titleInput" placeholder="Enter title of the rumor">
+            <input type="text" id="titleInput" placeholder="Enter the title of the rumor" autofocus>
             <textarea id="contentInput" placeholder="Enter the detailed description of the rumor"></textarea>
             <input type="button" value="Publish" onclick="publishRumor()">
         </div>
@@ -90,7 +115,7 @@
                 const section = document.getElementById('rumorsSection');
                 const article = document.createElement('article');
                 article.innerHTML = `<h2>${title}</h2><p class="date">Date: ${date}</p><p>${content}</p>`;
-                section.prepend(article);
+                section.prepend(article); // Adds the article at the top of the section
 
                 // Clear input fields
                 document.getElementById('titleInput').value = '';
@@ -102,3 +127,4 @@
     </script>
 </body>
 </html>
+
